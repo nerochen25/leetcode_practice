@@ -275,16 +275,17 @@ var reverseList = function(head) {
 //  * @return {number}
 //  */
 var maxProfit = function(prices) {
-    //pick the min el with its index
-    //then compare  to the rest of the els
-    //then pick a max el within the rest with its index
-    let minVal = Math.min(...prices);
-    let minIdx = prices.indexOf(minVal);
-    let newPrices = prices.slice(minIdx+1);
-    let maxPrice = Math.max(...newPrices);
-    if (maxPrice <= minVal) {
-        return 0;
-    } else {
-        return maxPrice - minVal
+    let mostProfit = 0;
+    var minVal = prices[0];
+    for (let i = 0; i < prices.length; i++) {
+        if (prices[i] <= minVal) {
+            minVal = prices[i];
+        }
+        var curProfit = prices[i+1] - minVal;
+        if (curProfit > 0 && curProfit > mostProfit) {
+            mostProfit = curProfit
+        }
     }
+    return mostProfit
 };
+
