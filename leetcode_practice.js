@@ -376,17 +376,13 @@ var hasCycle = function(head) {
 var licenseKeyFormatting = function(S, K) {
     S = S.toUpperCase();
     S = S.split('-').join('');
-    let firstGroupLength = 0;
-    let firstGroupStr;
-    let restGroupLength = 0;
-    let restGroupStr;
     let numGroups = 0
     
     if (S.length % K !== 0) {
-        firstGroupLength = S.length % K;
-        firstGroupStr = S.slice(0,firstGroupLength);
-        restGroupStr = S.slice(firstGroupLength, S.length);
-        restGroupLength = restGroupStr.length;
+        let firstGroupLength = S.length % K;
+        let firstGroupStr = S.slice(0,firstGroupLength);
+        let restGroupStr = S.slice(firstGroupLength, S.length);
+        let restGroupLength = restGroupStr.length;
         numGroups = restGroupLength / K;
         let groupArr = [firstGroupStr];
         for (let i = 0; i < numGroups; i++) {
@@ -405,5 +401,4 @@ var licenseKeyFormatting = function(S, K) {
         }
         return groupArr.join('-');
     }
-
 };
