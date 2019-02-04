@@ -366,3 +366,44 @@ var hasCycle = function(head) {
     }
     return false;
 };
+
+//482. License Key Formatting
+// /**
+//  * @param {string} S
+//  * @param {number} K
+//  * @return {string}
+//  */
+var licenseKeyFormatting = function(S, K) {
+    S = S.toUpperCase();
+    S = S.split('-').join('');
+    let firstGroupLength = 0;
+    let firstGroupStr;
+    let restGroupLength = 0;
+    let restGroupStr;
+    let numGroups = 0
+    
+    if (S.length % K !== 0) {
+        firstGroupLength = S.length % K;
+        firstGroupStr = S.slice(0,firstGroupLength);
+        restGroupStr = S.slice(firstGroupLength, S.length);
+        restGroupLength = restGroupStr.length;
+        numGroups = restGroupLength / K;
+        let groupArr = [firstGroupStr];
+        for (let i = 0; i < numGroups; i++) {
+            let curStr = restGroupStr.slice(0,K);
+            groupArr.push(curStr);
+            restGroupStr = restGroupStr.slice(K)
+        }
+        return groupArr.join('-');
+    } else {
+        numGroups = S.length / K;
+        let groupArr = [];
+        for (let i = 0; i < numGroups; i++) {
+            let curStr = S.slice(0,K);
+            groupArr.push(curStr);
+            S = S.slice(K)
+        }
+        return groupArr.join('-');
+    }
+
+};
