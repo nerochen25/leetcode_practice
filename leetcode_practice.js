@@ -293,5 +293,5 @@ var maxProfit = function(prices) {
 //175. Combine Two Tables
 // # Write your MySQL query statement below
 select FirstName, LastName, City, State
-from Person left join Address
+from Person left join Address //must be left join
 on Person.PersonId = Address.PersonId;
