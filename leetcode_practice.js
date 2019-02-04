@@ -295,3 +295,47 @@ var maxProfit = function(prices) {
 select FirstName, LastName, City, State
 from Person left join Address //must be left join
 on Person.PersonId = Address.PersonId;
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+
+
+//7. Reverse Integer
+
+var reverse = function(x) {
+    let posLimit = Math.pow(2, 31) - 1
+    let negLimit = (Math.pow(2, 31) - 1) * -1
+    //comfirm whether the input is a negative int
+    //If yes, turn input into a positve int
+    let negativeInt = false;
+    if (x < 0) {
+        negativeInt = true; 
+        x = x * -1;
+    }
+    
+    let intArr = [];
+    while (x >= 10) {
+        intArr.push(x % 10)
+        x = Math.floor(x / 10)
+    }
+    intArr.push(x);
+    
+    let reversedInt = 0;
+    for (let i = 0; i < intArr.length; i++) {
+        if (intArr[i] !== 0) {
+            reversedInt += intArr[i] * Math.pow(10, ((intArr.length-1) - i))
+        }
+    }
+    
+    if (negativeInt) {
+        reversedInt *= -1;
+    }
+    
+    if (reversedInt > posLimit || reversedInt <= negLimit) {
+        return 0;
+    } else {
+        return reversedInt;
+    }
+};
