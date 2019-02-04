@@ -354,6 +354,9 @@ var reverse = function(x) {
 //  * @return {boolean}
 //  */
 var hasCycle = function(head) {
+    //loop through each node
+    //set new val pair: visited, for each iteration
+    //if visited is true, return true early
     while(head) {
         if(head.visited) {
             return true;
