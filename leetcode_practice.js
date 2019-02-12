@@ -450,3 +450,75 @@ function permutations(array) {
 // Note:
 // Ŏ You may assume that all inputs are consist of lowercase letters a-z.
 // Ŏ All inputs are guaranteed to be non-empty strings.
+
+class TrieNode {
+    constructor() {
+      this.children = {},
+      this.isWord = false
+    }
+  }
+  
+  class Trie extends TrieNode {
+    constructor(props) {
+      super(props)
+      this.rootNode = new TrieNode('');
+    };
+  
+    insert(word) {
+      var currNode = this.rootNode;
+      var letter = word.slice(0,1); 
+      word = word.slice(1); 
+  
+      var child;
+  
+      while(letter.length > 0){
+          if (currNode.children[letter] === undefined) {
+              child = new TrieNode(letter);
+              currNode.children[letter] = child;
+          } else {
+              child = currNode.children[letter];
+          } 
+          currNode = child;        
+          letter = word.slice(0,1);
+          word = word.slice(1);       
+      }
+  
+      child.isWord = true;   
+    };
+  
+    search(word) {
+      var currNode = this.rootNode;
+      var letter = word.slice(0,1);
+      word = word.slice(1);
+  
+      while(letter.length > 0) {
+          if (currNode.children[letter]) {
+                  currNode = currNode.children[letter];			
+            if (word.length == 0) {  
+                return currNode.isWord;
+            }			
+            letter = word.slice(0,1);
+            word = word.slice(1);			           
+          } else {
+              return false;
+          }
+      }    
+    };
+  
+    startsWith(prefix) {
+      var currNode = this.rootNode;
+      var letter = prefix.slice(0,1);
+      prefix = prefix.slice(1);    
+  
+      while (letter.length > 0) {
+          if (currNode.children[letter]){
+                  currNode = currNode.children[letter];			           			
+            letter = prefix.slice(0,1);
+            prefix = prefix.slice(1);			           
+          } else {
+              return false;
+          }  
+      }
+      return true;
+    };
+  };
