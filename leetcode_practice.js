@@ -522,3 +522,68 @@ class TrieNode {
       return true;
     };
   };
+
+
+// 13. Roman to Integer
+//   /**
+//  * @param {string} s
+//  * @return {number}
+//  */
+var romanToInt = function(s) {
+    const romanSyms = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    };
+    
+    let result = 0;
+    
+    for (let i = 0; i < s.length; i++) {
+        switch (s[i]) {
+            case "I":
+                if (s[i+1] === "V" || s[i+1] === "X") {
+                    result -= romanSyms.I
+                } else {
+                    result += romanSyms.I
+                }
+                break;
+
+            case "V":
+                result += romanSyms.V;
+                break;
+                
+            case "X":
+                if (s[i+1] === "L" || s[i+1] === "C") {
+                    result -= romanSyms.X
+                } else {
+                    result += romanSyms.X
+                }
+                break;
+
+            case "L":
+                result += romanSyms.L;
+                break;
+
+            case "C":
+                if (s[i+1] === "D" || s[i+1] === "M") {
+                    result -= romanSyms.C
+                } else {
+                    result += romanSyms.C
+                };
+                break;
+
+            case "D":
+                result += romanSyms.D;
+                break;
+
+            case "M":
+                result += romanSyms.M;
+                break;
+        }
+    }
+    return result;
+};
