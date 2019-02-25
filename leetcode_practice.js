@@ -595,3 +595,32 @@ var romanToInt = function(s) {
 
 // n: the number of socks in the pile
 // ar: the colors of each sock
+
+function sockMerchant(n, ar) {
+    //iterate arr
+    //create unique arr
+    let sockObj = {};
+    let result = 0;
+    let numPair;
+
+    for (let i = 0; i < n; i++) {
+        if (sockObj[ar[i]] === undefined) {
+            sockObj[ar[i]];
+            sockObj[ar[i]] = 1
+        } else {
+            sockObj[ar[i]] += 1
+        }
+    }
+
+    Object.values(sockObj).forEach(int => {
+        if (int % 2 !== 0) {
+            numPair = (int - 1) / 2;
+            result += numPair;
+        } else {
+            numPair = int / 2;
+            result += numPair;
+        }
+    })
+
+    return result;
+}
