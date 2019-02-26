@@ -694,3 +694,43 @@ MyQueue.prototype.empty = function() {
  * var param_3 = obj.peek()
  * var param_4 = obj.empty()
  */
+
+// 160. Intersection of Two Linked Lists
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+// /**
+//  * @param {ListNode} headA
+//  * @param {ListNode} headB
+//  * @return {ListNode}
+//  */
+var getIntersectionNode = function(headA, headB) {
+    if (!headA || !headB) {
+        return null;
+    }
+    
+    let hA = headA;
+    let hB = headB;
+    
+    while (hA !== hB ) {
+        hA = hA.next;
+        hB = hB.next;
+        
+        // both can be NULL or the same
+        if (hA === hB) {
+            return hA;
+        }
+        
+        // remove the gap after the first full traversal
+        if (!hA) { hA = headB; }
+        if (!hB) { hB = headA; }
+    }
+    
+    // the answer has been found
+    return hA;
+};
