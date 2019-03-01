@@ -734,3 +734,55 @@ var getIntersectionNode = function(headA, headB) {
     // the answer has been found
     return hA;
 };
+
+//WalmartLabs Interview Question
+//betterCompression(str)
+const betterCompression = (str) => {
+    let obj = {};
+    let letters = [];
+    let numbers = [];
+    let number = '';
+    let resultStr = '';
+  
+    for (let i = 0; i < str.length; i++) {
+      if (isLetter(str[i]) === true) {
+        if (number.length >= 1) {
+          numbers.push(parseInt(number))
+        }
+        letters.push(str[i])
+        number = '';
+      } else {
+        number += str[i];
+      }
+    }
+    numbers.push(parseInt(number))
+  
+    for(let j = 0; j < numbers.length; j++) {
+      obj[letters[j]] = 0;
+    }
+  
+    for(let k = 0; k < numbers.length; k++) {
+      obj[letters[k]] += numbers[k];
+    }
+    
+    let objKeys = Object.keys(obj);
+    let objVals = Object.values(obj);
+  
+    for (let l = 0; l < objKeys.length; l++) {
+      resultStr += (objKeys[l] + objVals[l]);
+    }
+  
+    return resultStr;
+  
+  }
+  
+  const isLetter = (letter) => {
+    if (letter >= 'a' && letter <= 'z') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+console.log(betterCompression('a12a14b1b2c1c2'));
+  
