@@ -785,4 +785,35 @@ const betterCompression = (str) => {
   }
   
 console.log(betterCompression('a12a14b1b2c1c2'));
+
+//Shorter solution by Jack
+var isAlpha = function(ch){
+    return typeof ch === "string" && ch.length === 1
+           && (ch >= "a" && ch <= "z" || ch >= "A" && ch <= "Z");
+  }
+  
+function parse(input) {
+    let result = {};
+    let letters = input.split('');
+    let prevLetter = '';
+    let prevNumber = '';
+    letters.map((letter, index) => {
+        // If current letter we're looking at isAlpha and previous was not, it's time to update results
+        if (index === 0) {
+            prevLetter = letter;
+        } else if (index === letters.length - 1) {
+            // If we are on the last letter, then that means we need to update result object with prevLetter and prevNumber
+            prevNumber = prevNumber + letter; // Concatenate the current letter onto the prevNumber
+            result[prevLetter] = Number(prevNumber) + result[prevLetter]; // Update result with sum of result[prevLetter] and prevNumber
+        } else if (isAlpha(letter) && isAlpha(prevLetter)) {
+            // If we have already had a letter and we see a second letter (a10b, this is when b is current letter)
+            result[prevLetter] = result[prevLetter] || 0 + Number(prevNumber);
+            prevLetter = letter; // Update prevLetter to be the current letter (starting a new key)
+            prevNumber = ''; // Need to clear prevNumber
+        } else if (!isAlpha(letter)) {
+            prevNumber = prevNumber + letter; // If current letter we're looking at is not Alpha, then we have to update the number string
+        }
+    })
+    return result;
+}
   
